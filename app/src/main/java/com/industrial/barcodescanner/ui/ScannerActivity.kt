@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.activity.viewModels
+import androidx.activity.viewModels   // <-- ADD THIS
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
