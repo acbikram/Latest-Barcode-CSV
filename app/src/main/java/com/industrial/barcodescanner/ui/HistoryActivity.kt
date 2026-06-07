@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels   // <-- ADD THIS
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 
 class HistoryActivity : AppCompatActivity() {
 
-    private val viewModel: HistoryViewModel by viewModels()
+    private lateinit var viewModel: HistoryViewModel
     private lateinit var adapter: HistoryAdapter
 
     private val filePickerLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -35,6 +35,8 @@ class HistoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
+
+        viewModel = ViewModelProvider(this).get(HistoryViewModel::class.java)
 
         val recyclerHistory = findViewById<RecyclerView>(R.id.recyclerHistory)
         val btnExportCsv = findViewById<Button>(R.id.btnExportCsv)
