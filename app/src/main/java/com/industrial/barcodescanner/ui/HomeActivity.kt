@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.industrial.barcodescanner.databinding.ActivityHomeBinding
 
@@ -14,14 +15,29 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        try {
+            binding = ActivityHomeBinding.inflate(layoutInflater)
+            setContentView(binding.root)
+        } catch (e: Exception) {
+            Toast.makeText(this, "Layout error: ${e.message}", Toast.LENGTH_LONG).show()
+            e.printStackTrace()
+            return
+        }
 
-        sharedPreferences = getSharedPreferences("ScannerPrefs", Context.MODE_PRIVATE)
-        loadSavedConfigurations()
+        try {
+            sharedPreferences = getSharedPreferences("ScannerPrefs", Context.MODE_PRIVATE)
+            loadSavedConfigurations()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Config error: ${e.message}", Toast.LENGTH_LONG).show()
+            return
+        }
 
         binding.btnStartScan.setOnClickListener {
-            saveConfigurationsAndStart()
+            try {
+                saveConfigurationsAndStart()
+            } catch (e: Exception) {
+                Toast.makeText(this, "Start error: ${e.message}", Toast.LENGTH_LONG).show()
+            }
         }
 
         binding.btnViewHistory.setOnClickListener {
