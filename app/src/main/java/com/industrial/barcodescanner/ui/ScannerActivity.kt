@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.activity.viewModels   // <-- ADD THIS
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
@@ -16,6 +15,7 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.industrial.barcodescanner.databinding.ActivityScannerBinding
 import com.industrial.barcodescanner.ui.viewmodel.ScannerViewModel
@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 class ScannerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityScannerBinding
-    private val viewModel: ScannerViewModel by viewModels()
+    private lateinit var viewModel: ScannerViewModel
 
     private var tagType: String = "A4"
     private var unitType: String = "PCS"
@@ -42,6 +42,8 @@ class ScannerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityScannerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        viewModel = ViewModelProvider(this).get(ScannerViewModel::class.java)
 
         tagType = intent.getStringExtra("TAG_TYPE") ?: "A4"
         unitType = intent.getStringExtra("UNIT_TYPE") ?: "PCS"
