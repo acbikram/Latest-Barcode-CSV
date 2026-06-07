@@ -7,6 +7,7 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageProxy   // <-- ADD THIS
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
 
@@ -19,7 +20,7 @@ class BarcodeAnalyzer(
     private var lastScannedTime = 0L
     private val debounceDelay = 1000L
 
-    override fun analyze(imageProxy: ImageAnalysis.ImageProxy) {
+    override fun analyze(imageProxy: ImageProxy) {
         val mediaImage = imageProxy.image ?: return
         val inputImage = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
 
@@ -33,7 +34,7 @@ class BarcodeAnalyzer(
                             playBeep()
                             vibrate()
                             onBarcodeDetected(value)
-                            break
+                            return@addOnSuccessListener   // exit after first valid scan
                         }
                     }
                 }
