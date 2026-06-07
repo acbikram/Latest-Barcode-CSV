@@ -7,7 +7,7 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageProxy   // <-- ADD THIS
+import androidx.camera.core.ImageProxy
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
 
@@ -34,7 +34,7 @@ class BarcodeAnalyzer(
                             playBeep()
                             vibrate()
                             onBarcodeDetected(value)
-                            return@addOnSuccessListener   // exit after first valid scan
+                            return@addOnSuccessListener
                         }
                     }
                 }
