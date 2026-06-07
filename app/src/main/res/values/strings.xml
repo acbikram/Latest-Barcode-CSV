@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Barcode To CSV</string>
+    <string name="scanner_title">BARCODE TO CSV CONSOLE</string>
+    <string name="config_prefix">Config: </string>
+    <string name="feed_active">LIVE FEED ACTIVE</string>
+    <string name="standby_title">STANDBY SAVING MODE</string>
+    <string name="standby_subtitle">Tap screen to wake camera instantly</string>
+    <string name="tap_to_set_price">TAP TO ENTER PRICE</string>
+</resources>
